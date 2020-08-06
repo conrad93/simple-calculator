@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CALCULATOR</title>
+	<style>
+		.calculator{
+			box-shadow: 5px 10px 18px;
+			border-radius: 5px;
+			width: 300px;
+			margin-top:30px;
+			margin-right: auto;
+			margin-left: auto;
+			text-align: center;
+			padding: 10px;
+			background-color: grey;
+		}
+		#display{
+			width: 90%;
+			height: 50px;
+			font-size: 50px;
+			background-color: black;
+			color: yellow;
+			border: 2px solid green;
+			outline: none;
+			text-align: right; 
+			padding: 5px;
+		}
+		.calculator button{
+			background-color: orange;
+			color: red;
+			border: 1px solid black;
+			font-size: 20px;
+			padding: 5px 15px;
+			margin: 5px;
+			width: 75px;
+			font-weight: bold;
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="calculator">
+		<h1>CALCULATOR</h1>
+		<input id="display" placeholder="0">
+		<div>
+			<button type="button" onclick="btn('9')">9</button>
+			<button type="button" onclick="btn('8')">8</button>
+			<button type="button" onclick="btn('7')">7</button>
+		</div>
+		<div>
+			<button type="button" onclick="btn('6')">6</button>
+			<button type="button" onclick="btn('5')">5</button>
+			<button type="button" onclick="btn('4')">4</button>
+		</div>
+		<div>
+			<button type="button" onclick="btn('3')">3</button>
+			<button type="button" onclick="btn('2')">2</button>
+			<button type="button" onclick="btn('1')">1</button>
+		</div>
+		<div>
+			<button type="button" onclick="btn('.')">.</button>
+			<button type="button" onclick="btn('0')">0</button>
+			<button type="button" onclick="clearAll()">C</button>
+		</div>
+		<div>
+			<button type="button" onclick="btn('+')">+</button>
+			<button type="button" onclick="btn('-')">-</button>
+			<button type="button" onclick="backspace()">&larr;</button>
+		</div>
+		<div>
+			<button type="button" onclick="btn('*')">*</button>
+			<button type="button" onclick="btn('/')">/</button>
+			<button type="button" onclick="equals()">=</button>
+		</div>
+	</div>
+	<script>
+		function btn(value){
+			document.getElementById('display').value += value;
+		}
+		function clearAll(){
+			document.getElementById('display').value = '';
+		}
+		function backspace(){
+			var n = document.getElementById('display').value;
+			document.getElementById('display').value = n.substr(0, n.length - 1);
+		}
+		function equals(){
+			document.getElementById('display').value = eval(document.getElementById('display').value);
+		}
+	</script>
+</body>
+</html>
