@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Animation</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 5px;
+        }
+        #cursor{
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            display: none;
+            pointer-events: none;
+            transition: width 1s, height 1s, border 1s;
+        }
+        .main:hover + #cursor{
+            border: 2px solid #000;
+            width: 100px;
+            height: 100px;
+            transition: width 1s, height 1s, border 1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>CURSOR</h1>
+    </div>
+    <div id="cursor"></div>
+    <script>
+        var cursor = document.getElementById("cursor");
+        document.addEventListener("mousemove", (e) => {
+            let x = e.pageX;
+            let y = e.pageY;
+
+            cursor.style.top = y + "px";
+            cursor.style.left = x + "px";
+            cursor.style.display = "block";
+
+        });
+        document.addEventListener("mouseout", () => {
+            cursor.style.display = "none";
+        });
+    </script>
+</body>
+</html>
