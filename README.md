@@ -18,3 +18,6 @@
 6. Cursor
    * [Link](https://conrad93.github.io/simple-calculator/cursor.html)
    * Cursor animation (on mousemove and mouseout).
+7. Web Share API
+   * [Link](https://conrad93.github.io/simple-calculator/webShareAPI.html)
+   * Simple web share api demo (navigator.share()).
