@@ -21,3 +21,6 @@
 7. Web Share API
    * [Link](https://conrad93.github.io/simple-calculator/webShareAPI.html)
    * Simple web share api demo (navigator.share()).
+8. HTML Canvas
+   * [Link](https://conrad93.github.io/simple-calculator/canvas.html)
+   * Simple HTML canvas demo.
