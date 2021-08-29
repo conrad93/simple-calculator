@@ -27,7 +27,7 @@
             y: undefined
         };
         var maxRadius = 40;
-        var colorArray = ['red','Orange','Yellow','Green','Blue','Indigo','Violet'];
+        var colorArray = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet'];
         var circleArray = [];
 
         window.addEventListener('mousemove', function(event){
@@ -54,7 +54,6 @@
             this.draw = function() {
                 c.beginPath();
                 c.arc(this.x, this.y, this.radius, 0,Math.PI * 2, false);
-                c.strokeStyle = 'blue';
                 c.fillStyle = this.color;
                 c.fill();
             }
