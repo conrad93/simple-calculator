@@ -24,3 +24,6 @@
 8. HTML Canvas
    * [Link](https://conrad93.github.io/simple-calculator/canvas.html)
    * Simple HTML canvas demo.
+9. Stop-Watch
+   * [Link](https://conrad93.github.io/simple-calculator/stopwatch.html)
+   * Simple stop-watch.
