@@ -28,5 +28,5 @@
    * [Link](https://conrad93.github.io/simple-calculator/stopwatch.html)
    * Simple stop-watch.
 10. Drag & Drop
-   * [Link](https://conrad93.github.io/simple-calculator/drag-and-drop.html)
-   * Simple drag and drop app.
+    * [Link](https://conrad93.github.io/simple-calculator/drag-and-drop.html)
+    * Simple drag and drop app.
