@@ -30,3 +30,6 @@
 10. Drag & Drop
     * [Link](https://conrad93.github.io/simple-calculator/drag-and-drop.html)
     * Simple drag and drop app.
+11. Clock
+    * [Link](https://conrad93.github.io/simple-calculator/clock.html)
+    * Clock in html and javascript.
