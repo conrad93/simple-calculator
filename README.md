@@ -33,3 +33,6 @@
 11. Clock
     * [Link](https://conrad93.github.io/simple-calculator/clock.html)
     * Clock in html and javascript.
+12. Read-More-Example
+    * [Link](https://conrad93.github.io/simple-calculator/readMore.html)
+    * Simple Read-More example in html.
