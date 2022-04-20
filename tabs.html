@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        section{
+            height: auto;
+            margin: 12.5% 0% 0% 0%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main{
+            width: 80%;
+            transition: all 0.3s;
+        }
+        .tab{
+            overflow: hidden;
+        }
+        .tabLink{
+            float: left;
+            border: none;
+            border-radius: 8px 8px 0px 0px;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 16px;
+            font-weight: 700;
+            outline: none;
+            background-color: transparent;
+        }
+        .tab button:hover{
+            background-color: #00FFFF;
+        }
+        .tab button.active{
+            background-color: #87CEEB;
+        }
+        .tabContent{
+            padding: 6px 12px;
+            border-radius: 0px 0px 8px 8px;
+            border-bottom: 5px solid #00FFFF;
+            background-color: #87CEEB;
+            display: none;
+        }
+        .mainV{
+            display: flex;
+            margin-bottom: 5%;
+        }
+        .mainV .tab{
+            width: 20%;
+        }
+        .tabLinkV{
+            width: 100%;
+            border: none;
+            border-radius: 8px 0px 0px 8px;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 16px;
+            font-weight: 700;
+            outline: none;
+            background-color: transparent;
+        }
+        .tabContentV{
+            height: 100%;
+            padding: 6px 12px;
+            border-radius: 0px 8px 8px 0px;
+            border-right: 5px solid #00FFFF;
+            background-color: #87CEEB;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="main">
+            <div class="tab">
+                <button class="tabLink" onclick="openTabs(event,'one','h')" id="defaultOpen">One</button>
+                <button class="tabLink" onclick="openTabs(event,'two','h')">Two</button>
+                <button class="tabLink" onclick="openTabs(event,'three','h')">Three</button>
+                <button class="tabLink" onclick="openTabs(event,'four','h')">Four</button>
+            </div>
+            <div id="one" class="tabContent">
+                <h3>One</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+            </div>
+            <div id="two" class="tabContent">
+                <h3>Two</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+            </div>
+            <div id="three" class="tabContent">
+                <h3>Three</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+            </div>
+            <div id="four" class="tabContent">
+                <h3>Four</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="main mainV">
+            <div class="tab">
+                <button class="tabLinkV" onclick="openTabs(event,'oneV','v')" id="defaultOpenV">One</button>
+                <button class="tabLinkV" onclick="openTabs(event,'twoV','v')">Two</button>
+                <button class="tabLinkV" onclick="openTabs(event,'threeV','v')">Three</button>
+                <button class="tabLinkV" onclick="openTabs(event,'fourV','v')">Four</button>
+                <button class="tabLinkV" onclick="openTabs(event,'fourV','v')">Four</button>
+                <button class="tabLinkV" onclick="openTabs(event,'fourV','v')">Four</button>
+                <button class="tabLinkV" onclick="openTabs(event,'fourV','v')">Four</button>
+                <button class="tabLinkV" onclick="openTabs(event,'fourV','v')">Four</button>
+            </div>
+            <div>
+                <div id="oneV" class="tabContentV">
+                    <h3>One</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+                </div>
+                <div id="twoV" class="tabContentV">
+                    <h3>Two</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+                </div>
+                <div id="threeV" class="tabContentV">
+                    <h3>Three</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+                </div>
+                <div id="fourV" class="tabContentV">
+                    <h3>Four</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function openTabs(event, tab,section){
+            if(section === 'h'){
+                let tabContent = document.getElementsByClassName("tabContent");
+                for (var i = 0; i < tabContent.length; i++){
+                    tabContent[i].style.display = "none";
+                }
+                let tabLink = document.getElementsByClassName("tabLink");
+                for (var j = 0; j < tabLink.length; j++){
+                    tabLink[j].className = tabLink[j].className.replace(" active", '');
+                }
+            } else if(section === 'v'){
+                let tabContentV = document.getElementsByClassName("tabContentV");
+                for (var i = 0; i < tabContentV.length; i++){
+                    tabContentV[i].style.display = "none";
+                }
+                let tabLinkV = document.getElementsByClassName("tabLinkV");
+                for (var j = 0; j < tabLinkV.length; j++){
+                    tabLinkV[j].className = tabLinkV[j].className.replace(" active", '');
+                }
+            }
+            document.getElementById(tab).style.display = "block";
+            event.currentTarget.className += " active";
+        }
+
+        document.getElementById("defaultOpen").click();
+        document.getElementById("defaultOpenV").click();
+    </script>
+</body>
+</html>
