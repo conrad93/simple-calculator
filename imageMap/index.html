@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Map</title>
+    <style>
+        section{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .size{
+            height: 500px;
+            width: 750px;
+        }
+        .card{
+            margin: 10px;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 2px 4px 4px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="card size">
+            <img src="image-colored.png" height="100%" width="100%" usemap="#imageMap"/>
+            <map name="imageMap">
+                <area shape="circle" coords="67, 97, 10" onclick="getBodyPart(event,'neck')" href="#">
+                <area shape="circle" coords="222, 92, 10" onclick="getBodyPart(event,'neck')" href="#">
+                <area shape="circle" coords="32, 119, 10" onclick="getBodyPart(event,'shoulder')" href="#">
+                <area shape="circle" coords="102, 117, 10" onclick="getBodyPart(event,'shoulder')" href="#">
+                <area shape="circle" coords="186, 119, 10" onclick="getBodyPart(event,'shoulder')" href="#">
+                <area shape="circle" coords="256, 119, 10" onclick="getBodyPart(event,'shoulder')" href="#">
+                <area shape="circle" coords="67, 178, 10" onclick="getBodyPart(event,'core')" href="#">
+                <area shape="circle" coords="222, 178, 10" onclick="getBodyPart(event,'back_trunk')" href="#">
+                <area shape="circle" coords="66, 239, 10" onclick="getBodyPart(event,'hip')" href="#">
+                <area shape="circle" coords="220, 242, 10" onclick="getBodyPart(event,'hip')" href="#">
+                <area shape="circle" coords="28, 177, 10" onclick="getBodyPart(event,'elbow')" href="#">
+                <area shape="circle" coords="106, 179, 10" onclick="getBodyPart(event,'elbow')" href="#">
+                <area shape="circle" coords="181, 181, 10" onclick="getBodyPart(event,'elbow')" href="#">
+                <area shape="circle" coords="21, 219, 10" onclick="getBodyPart(event,'wrist')" href="#">
+                <area shape="circle" coords="115, 223, 10" onclick="getBodyPart(event,'wrist')" href="#">
+                <area shape="circle" coords="174, 224, 10" onclick="getBodyPart(event,'wrist')" href="#">
+                <area shape="circle" coords="269, 224, 10" onclick="getBodyPart(event,'wrist')" href="#">
+                <area shape="circle" coords="14, 225, 10" onclick="getBodyPart(event,'fingers')" href="#">
+                <area shape="circle" coords="121, 225, 10" onclick="getBodyPart(event,'fingers')" href="#">
+                <area shape="circle" coords="168, 225, 10" onclick="getBodyPart(event,'fingers')" href="#">
+                <area shape="circle" coords="274, 225, 10" onclick="getBodyPart(event,'fingers')" href="#">
+                <area shape="circle" coords="54, 350, 10" onclick="getBodyPart(event,'knee')" href="#">
+                <area shape="circle" coords="80, 347, 10" onclick="getBodyPart(event,'knee')" href="#">
+                <area shape="circle" coords="206, 344, 10" onclick="getBodyPart(event,'knee')" href="#">
+                <area shape="circle" coords="235, 345, 10" onclick="getBodyPart(event,'knee')" href="#">
+                <area shape="circle" coords="56, 438, 10" onclick="getBodyPart(event,'ankle_foot')" href="#">
+                <area shape="circle" coords="78, 434, 10" onclick="getBodyPart(event,'ankle_foot')" href="#">
+                <area shape="circle" coords="210, 440, 10" onclick="getBodyPart(event,'ankle_foot')" href="#">
+                <area shape="circle" coords="232, 441, 10" onclick="getBodyPart(event,'ankle_foot')" href="#">
+            </map>
+        </div>
+        <div class="card">
+            <div id="coords">
+                x: none & y: none
+            </div>
+        </div>
+    </section>
+    <script>
+        var coords = document.getElementById('coords');
+        document.addEventListener("mousemove", (e) => {
+            let x = event.pageX;
+            let y = event.pageY;
+            coords.innerHTML = `x: ${x} & y: ${y}`;
+        });
+        function getBodyPart(event,bodyPart){
+            let x = event.pageX;
+            let y = event.pageY;
+            alert(`x: ${x} & y: ${y} => Body part(${bodyPart})`);
+        }
+    </script>
+</body>
+</html>
