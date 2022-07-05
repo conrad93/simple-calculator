@@ -11,7 +11,7 @@
             padding: 0;
         }
         section{
-            margin: 7% 0% 0% 0%;
+            margin: 5% 0%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,7 +20,6 @@
             width: 80%;
         }
         .tab{
-            height: 46px;
             white-space: nowrap;
             overflow: auto hidden;
         }
@@ -52,29 +51,17 @@
             display: flex;
         }
         .tabVertical{
-            overflow: auto;
+            overflow: hidden auto;
+            flex-shrink: 0;
+            width: 75px;
         }
         .tabContentContainerVertical{
             display: flex;
         }
         .tabLinkVertical{
             width: 100%;
-            border: none;
-            border-radius: 8px 0px 0px 8px;
-            cursor: pointer;
-            padding: 14px 16px;
-            font-size: 16px;
-            font-weight: 700;
-            outline: none;
-            background-color: transparent;
         }
         .tabContentVertical{
-            flex: 1;
-            padding: 6px 12px;
-            border-radius: 0px 8px 8px 0px;
-            border-right: 5px solid #FFA500;
-            background-color: #eeeeee;
-            display: none;
             overflow-y: auto;
         }
     </style>
@@ -111,25 +98,25 @@
     <section>
         <div class="main mainVertical">
             <div class="tabVertical">
-                <button class="tabLinkVertical btn" onclick="openTabs(event,'oneVertical','vertical')" id="defaultOpenVertical">One</button>
-                <button class="tabLinkVertical btn" onclick="openTabs(event,'twoVertical','vertical')">Two</button>
-                <button class="tabLinkVertical btn" onclick="openTabs(event,'threeVertical','vertical')">Three</button>
-                <button class="tabLinkVertical btn" onclick="openTabs(event,'fourVertical','vertical')">Four</button>
+                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'oneVertical','vertical')" id="defaultOpenVertical">One</button>
+                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'twoVertical','vertical')">Two</button>
+                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'threeVertical','vertical')">Three</button>
+                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'fourVertical','vertical')">Four</button>
             </div>
             <div class="tabContentContainerVertical">
-                <div id="oneVertical" class="tabContentVertical">
+                <div id="oneVertical" class="tabContent tabContentVertical">
                     <h3>One</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="twoVertical" class="tabContentVertical">
+                <div id="twoVertical" class="tabContent tabContentVertical">
                     <h3>Two</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="threeVertical" class="tabContentVertical">
+                <div id="threeVertical" class="tabContent tabContentVertical">
                     <h3>Three</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="fourVertical" class="tabContentVertical">
+                <div id="fourVertical" class="tabContent tabContentVertical">
                     <h3>Four</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
