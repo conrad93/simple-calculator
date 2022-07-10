@@ -23,9 +23,8 @@
             white-space: nowrap;
             overflow: auto hidden;
         }
-        .tabLink{
+        .link{
             border: none;
-            border-radius: 8px 8px 0px 0px;
             cursor: pointer;
             padding: 14px 16px;
             font-size: 16px;
@@ -33,18 +32,25 @@
             outline: none;
             background-color: transparent;
         }
+        .tabLink{
+            border-radius: 8px 8px 0px 0px;
+        }
         .btn:hover{
-            background-color: #FFA500;
+            background-color: #FFA400;
         }
         .btn.active{
-            background-color: #eeeeee;
+            background-color: #0F00FF;
+            color: #eeeeee;
+        }
+        .content{
+            padding: 6px 12px;
+            background-color: #0F00FF;
+            display: none;
+            color: #eeeeee;
         }
         .tabContent{
-            padding: 6px 12px;
             border-radius: 0px 0px 8px 8px;
-            border-bottom: 5px solid #FFA500;
-            background-color: #eeeeee;
-            display: none;
+            border-bottom: 5px solid #FFA400;
         }
         .mainVertical{
             height: 200px;
@@ -60,9 +66,12 @@
         }
         .tabLinkVertical{
             width: 100%;
+            border-radius: 8px 0px 0px 8px;
         }
         .tabContentVertical{
             overflow-y: auto;
+            border-radius: 0px 8px 8px 0px;
+            border-right: 5px solid #FFA400;
         }
     </style>
 </head>
@@ -70,25 +79,25 @@
     <section>
         <div class="main">
             <div class="tab">
-                <button class="tabLink btn" onclick="openTabs(event,'one','horizontal')" id="defaultOpen">One</button>
-                <button class="tabLink btn" onclick="openTabs(event,'two','horizontal')">Two</button>
-                <button class="tabLink btn" onclick="openTabs(event,'three','horizontal')">Three</button>
-                <button class="tabLink btn" onclick="openTabs(event,'four','horizontal')">Four</button>
+                <button class="tabLink btn link" onclick="openTabs(event,'one','horizontal')" id="defaultOpen">One</button>
+                <button class="tabLink btn link" onclick="openTabs(event,'two','horizontal')">Two</button>
+                <button class="tabLink btn link" onclick="openTabs(event,'three','horizontal')">Three</button>
+                <button class="tabLink btn link" onclick="openTabs(event,'four','horizontal')">Four</button>
             </div>
             <div class="tabContentContainer">
-                <div id="one" class="tabContent">
+                <div id="one" class="tabContent content">
                     <h3>One</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="two" class="tabContent">
+                <div id="two" class="tabContent content">
                     <h3>Two</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="three" class="tabContent">
+                <div id="three" class="tabContent content">
                     <h3>Three</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="four" class="tabContent">
+                <div id="four" class="tabContent content">
                     <h3>Four</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
@@ -98,25 +107,25 @@
     <section>
         <div class="main mainVertical">
             <div class="tabVertical">
-                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'oneVertical','vertical')" id="defaultOpenVertical">One</button>
-                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'twoVertical','vertical')">Two</button>
-                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'threeVertical','vertical')">Three</button>
-                <button class="tabLink tabLinkVertical btn" onclick="openTabs(event,'fourVertical','vertical')">Four</button>
+                <button class="tabLinkVertical btn link" onclick="openTabs(event,'oneVertical','vertical')" id="defaultOpenVertical">One</button>
+                <button class="tabLinkVertical btn link" onclick="openTabs(event,'twoVertical','vertical')">Two</button>
+                <button class="tabLinkVertical btn link" onclick="openTabs(event,'threeVertical','vertical')">Three</button>
+                <button class="tabLinkVertical btn link" onclick="openTabs(event,'fourVertical','vertical')">Four</button>
             </div>
             <div class="tabContentContainerVertical">
-                <div id="oneVertical" class="tabContent tabContentVertical">
+                <div id="oneVertical" class="tabContentVertical content">
                     <h3>One</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="twoVertical" class="tabContent tabContentVertical">
+                <div id="twoVertical" class="tabContentVertical content">
                     <h3>Two</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="threeVertical" class="tabContent tabContentVertical">
+                <div id="threeVertical" class="tabContentVertical content">
                     <h3>Three</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
-                <div id="fourVertical" class="tabContent tabContentVertical">
+                <div id="fourVertical" class="tabContentVertical content">
                     <h3>Four</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus nesciunt deleniti error! Nesciunt magnam sequi quo! Fugit, iure tenetur dolore ab aut doloribus blanditiis dignissimos sit quo? Nisi, officia natus?</p>
                 </div>
