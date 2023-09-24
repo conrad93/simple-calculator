@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 Intro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="chart-container"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // const data = [25, 20, 10, 30];
+        const svg = d3.select("#chart-container").append("svg")
+        .attr("width", 500).attr("height", 500);
+
+        // svg.append("rect").attr("x", 5).attr("y", 5)
+        // .attr("width", 50).attr("height", 50)
+        // .attr("fill", "red");
+
+        // svg.append("line").attr("x1", 60).attr("y1", 60)
+        // .attr("x2", 10).attr("y2", 259)
+        // .attr("stroke", "green");
+
+        // svg.append("path").attr("d", "M60 10 L300 20 M300 20 L300 60")
+        // .attr("stroke", "black");
+
+        // const circles = svg.selectAll("circle").data(data);
+        // circles.enter().append("circle")
+        // .attr("cx", (d, i) => (i * 50) + 50)
+        // .attr("cy", 200)
+        // .attr("r", (d) => d)
+        // .attr("fill", "blue"); 
+
+        // d3.csv("data/ages.csv").then(data => {
+        //     data.forEach(d => {
+        //        d.age = Number(d.age); 
+        //     });
+        //     const circles = svg.selectAll("circle").data(data);
+        //     circles.enter().append("circle")
+        //     .attr("cx", (d, i) => (i * 50) + 50)
+        //     .attr("cy", 200)
+        //     .attr("r", (d) => 2 * d.age)
+        //     .attr("fill", (d) => {
+        //         if(d.name == "Tony"){
+        //             return "red";
+        //         } else {
+        //             return "blue";
+        //         }
+        //     }); 
+        // }).catch(e => {
+        //     console.error(e);
+        // });
+
+        d3.json("data/buildings.json").then(data => {
+            data.forEach(d => {
+               d.height = Number(d.height); 
+            });
+            const rects = svg.selectAll("rects").data(data);
+            rects.enter().append("rect")
+            .attr("x", (d, i) => (i * 60) + 60)
+            .attr("y", 10)
+            .attr("width", 50)
+            .attr("height", (d) => d.height)
+            .attr("fill", "grey"); 
+        }).catch(e => {
+            console.error(e);
+        });
+    </script>
+</body>
+</html>
