@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 Gapminder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="chart-container"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        const MARGIN = {LEFT: 100, TOP: 10, RIGHT: 10, BOTTOM: 100};
+        const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT;
+        const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM;
+
+        const svg = d3.select("#chart-container").append("svg")
+        .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
+        .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM);
+        const g = svg.append("g")
+        .attr("transform", `translate(${MARGIN.LEFT},${MARGIN.TOP})`);
+        
+        const x = d3.scaleLog().base(10).range([0, WIDTH]);
+        const y = d3.scaleLinear().range([HEIGHT, 0]);
+        const area = d3.scaleLinear().range([25*Math.PI, 1500*Math.PI]);
+	    const continentColor = d3.scaleOrdinal(d3.schemePastel1);
+
+        const xLabel = g.append("text")
+        .attr("y", HEIGHT + 50)
+        .attr("x", WIDTH / 2)
+        .attr("font-size", "20px")
+        .attr("text-anchor", "middle")
+        .text("GDP Per Capita ($)");
+        const yLabel = g.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -40)
+        .attr("x", -170)
+        .attr("font-size", "20px")
+        .attr("text-anchor", "middle")
+        .text("Life Expectancy (Years)");
+        const timeLabel = g.append("text")
+        .attr("y", HEIGHT - 10)
+        .attr("x", WIDTH - 40)
+        .attr("font-size", "40px")
+        .attr("opacity", "0.4")
+        .attr("text-anchor", "middle");
+
+        d3.json("data/global.json").then(data => {
+            let year = +data[0].year;
+            timeLabel.text(String(year));
+            let max_life_exp = 0;
+            let max_income = 0;
+            let max_population = 0;
+            let formattedData = data.map(year => {
+                return year["countries"].filter(country => country.income && country.life_exp)
+                .map(country => {
+                    country.income = Number(country.income);
+                    country.life_exp = Number(country.life_exp);
+                    country.population = Number(country.population);
+                    max_life_exp = Math.max(max_life_exp, country.life_exp);
+                    max_income = Math.max(max_income, country.income);
+                    max_population = Math.max(max_population, country.population);
+                    return country;
+                });
+            });
+            // x.domain([100, Math.ceil(max_income)]);
+            // y.domain([0, Math.ceil(max_life_exp)]);
+            // area.domain([0, Math.ceil(max_population)]);
+            x.domain([142, 150000]);
+            y.domain([0, 90]);
+            area.domain([2000, 1400000000]);
+
+            const xAxisCall = d3.axisBottom(x)
+            .tickValues([400, 4000, 40000])
+            .tickFormat(d3.format("$"));
+            g.append("g")
+            .attr("class", "x axis")
+            .attr("transform", `translate(0, ${HEIGHT})`)
+            .call(xAxisCall);
+
+            const yAxisCall = d3.axisLeft(y);
+            g.append("g")
+            .attr("class", "y axis")
+            .call(yAxisCall);
+
+            let time = 0;
+            d3.interval(function(){
+                time = (time < formattedData.length - 1) ? time + 1 : 0;
+                timeLabel.text(String(year + time));
+                update(formattedData[time]);
+            }, 100);
+            update(formattedData[time]);
+        }).catch(e => {
+            console.error(e);
+        });
+
+        function update(data){
+            const t = d3.transition().duration(100);
+            const circles = g.selectAll("circle")
+            .data(data, d => d.country);
+            circles.exit().remove();
+            circles.enter().append("circle")
+            .attr("fill", d => continentColor(d.continent))
+            .merge(circles)
+            .transition(t)
+            .attr("cy", d => y(d.life_exp))
+            .attr("cx", d => x(d.income))
+            .attr("r", d => Math.sqrt(area(d.population) / Math.PI));
+        }
+    </script>
+</body>
+</html>
