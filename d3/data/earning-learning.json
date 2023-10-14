@@ -1,0 +1,224 @@
+[
+    {
+        "month": "oct",
+        "year": 2020,
+        "earning": 0,
+        "learning": 5
+    },
+    {
+        "month": "nov",
+        "year": 2020,
+        "earning": 6252,
+        "learning": 5
+    },
+    {
+        "month": "dec",
+        "year": 2020,
+        "earning": 18101,
+        "learning": 5
+    },
+    {
+        "month": "jan",
+        "year": 2021,
+        "earning": 18089,
+        "learning": 5
+    },
+    {
+        "month": "feb",
+        "year": 2021,
+        "earning": 18101,
+        "learning": 5
+    },
+    {
+        "month": "mar",
+        "year": 2021,
+        "earning": 18001,
+        "learning": 9
+    },
+    {
+        "month": "apr",
+        "year": 2021,
+        "earning": 18101,
+        "learning": 8
+    },
+    {
+        "month": "may",
+        "year": 2021,
+        "earning": 17100.96,
+        "learning": 8
+    },
+    {
+        "month": "jun",
+        "year": 2021,
+        "earning": 17101,
+        "learning": 8
+    },
+    {
+        "month": "jul",
+        "year": 2021,
+        "earning": 17089,
+        "learning": 8
+    },
+    {
+        "month": "aug",
+        "year": 2021,
+        "earning": 31200,
+        "learning": 8
+    },
+    {
+        "month": "sep",
+        "year": 2021,
+        "earning": 21200,
+        "learning": 8
+    },
+    {
+        "month": "oct",
+        "year": 2021,
+        "earning": 21200,
+        "learning": 8
+    },
+    {
+        "month": "nov",
+        "year": 2021,
+        "earning": 21200,
+        "learning": 8
+    },
+    {
+        "month": "dec",
+        "year": 2021,
+        "earning": 21200,
+        "learning": 8
+    },
+    {
+        "month": "jan",
+        "year": 2022,
+        "earning": 21188,
+        "learning": 5
+    },
+    {
+        "month": "feb",
+        "year": 2022,
+        "earning": 21200,
+        "learning": 5
+    },
+    {
+        "month": "mar",
+        "year": 2022,
+        "earning": 24850,
+        "learning": 9
+    },
+    {
+        "month": "apr",
+        "year": 2022,
+        "earning": 24950,
+        "learning": 8
+    },
+    {
+        "month": "may",
+        "year": 2022,
+        "earning": 24950,
+        "learning": 8
+    },
+    {
+        "month": "jun",
+        "year": 2022,
+        "earning": 24950,
+        "learning": 8
+    },
+    {
+        "month": "jul",
+        "year": 2022,
+        "earning": 24938,
+        "learning": 8
+    },
+    {
+        "month": "aug",
+        "year": 2022,
+        "earning": 24950,
+        "learning": 8
+    },
+    {
+        "month": "sep",
+        "year": 2022,
+        "earning": 24950,
+        "learning": 8
+    },
+    {
+        "month": "oct",
+        "year": 2022,
+        "earning": 62866.67,
+        "learning": 8
+    },
+    {
+        "month": "nov",
+        "year": 2022,
+        "earning": 62866.67,
+        "learning": 8
+    },
+    {
+        "month": "dec",
+        "year": 2022,
+        "earning": 62866.67,
+        "learning": 8
+    },
+    {
+        "month": "jan",
+        "year": 2023,
+        "earning": 62854.67,
+        "learning": 5
+    },
+    {
+        "month": "feb",
+        "year": 2023,
+        "earning": 62866.67,
+        "learning": 5
+    },
+    {
+        "month": "mar",
+        "year": 2023,
+        "earning": 62766.67,
+        "learning": 9
+    },
+    {
+        "month": "apr",
+        "year": 2023,
+        "earning": 49396.67,
+        "learning": 8
+    },
+    {
+        "month": "may",
+        "year": 2023,
+        "earning": 58750.67,
+        "learning": 8
+    },
+    {
+        "month": "jun",
+        "year": 2023,
+        "earning": 90394,
+        "learning": 8
+    },
+    {
+        "month": "jul",
+        "year": 2023,
+        "earning": 72910,
+        "learning": 8
+    },
+    {
+        "month": "aug",
+        "year": 2023,
+        "earning": 72791,
+        "learning": 8
+    },
+    {
+        "month": "sep",
+        "year": 2023,
+        "earning": 72644,
+        "learning": 8
+    },
+    {
+        "month": "oct",
+        "year": 2023,
+        "earning": 71047,
+        "learning": 8
+    }
+]
