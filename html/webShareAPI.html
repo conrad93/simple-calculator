@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Share API</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main button{
+            padding: 6px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+            border: 1px solid gold;
+            outline: none;
+            background-color: transparent;
+            color: #000;
+            cursor: pointer;
+        }
+        .main button:hover{
+            border: 1px solid transparent;
+            background-color: gold;
+            color: #FFF;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        .modal{
+            display: none;
+            position: fixed;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            z-index: 3;
+            padding: 0px 10px;
+            border-radius: 10px;
+            background-color: #000;
+            color: #FFF;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn{
+            from{
+                top: 100%;
+                opacity: 0;       
+            }
+            to{
+                top: 85%;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h2>Web Share API</h2>
+        <button onclick="webShare()">Share</button>
+        <div class="modal">
+            <p>No message</p>
+        </div>
+    </div>
+    <script>
+        var modal = document.querySelector(".modal");
+        const shareData = {
+            title: "Conrad",
+            url: "https://www.youtube.com/channel/UCDyi992niPoY7iA8kV9Fo8g"
+        };
+        async function webShare(){
+            if(navigator.share){
+                try{
+                    await navigator.share(shareData);
+                    let message = "<p>Thanks for sharing.</p>";
+                    showMsg(message);
+                } catch(err){
+                    let message = "<p>Something went wrong.</p>";
+                    showMsg(message);
+                } 
+            } else {
+                let message = "<p>Web Share API is not supported.</p>";
+                showMsg(message);
+            }
+        }
+        function showMsg(msg){
+            modal.innerHTML = msg;
+            modal.style.display = "block";
+            setTimeout(() => {
+                modal.style.display = "none";    
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

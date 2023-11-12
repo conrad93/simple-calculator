@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop-Watch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+        #tableCard{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container p-3">
+        <div class="card my-3">
+            <div class="card-header text-center">
+                <h5>Stop-Watch</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center justify-content-center">
+                    <div class="col-2">
+                        <span class="fs-1" id="hours">00</span><sub class="fs-6">h</sub>
+                    </div>
+                    <div class="col-2">
+                        <span class="fs-1" id="minutes">00</span><sub class="fs-6">m</sub>
+                    </div>
+                    <div class="col-2">
+                        <span class="fs-1" id="seconds">00</span><sub class="fs-6">s</sub>
+                    </div>
+                    <div class="col-2">
+                        <span class="fs-1" id="milliseconds">00</span><sub class="fs-6">ms</sub>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-success m-1" type="button" onclick="start()">START</button>
+			    <button class="btn btn-danger m-1" type="button" onclick="stop()">STOP</button>
+			    <button class="btn btn-primary m-1" type="button" onclick="lap()">LAP</button>
+			    <button class="btn btn-warning m-1" type="button" onclick="reset()">RESET</button>
+            </div>
+        </div>
+        <div class="card mb-3" id="tableCard">
+            <div class="card-header text-center">
+                <h5>Lap</h5>
+            </div>
+            <div class="card-body">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Lap</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script>
+        let lapArray = [];
+        let timer;
+
+        function start(){
+            $(".btn-success").attr('disabled', true);
+            $(".btn-danger").attr('disabled', false);
+            $(".btn-warning").attr('disabled', false);
+            timer = setInterval(() => {
+                $("#milliseconds").html(parseInt($("#milliseconds").html()) + 1);
+                if (parseInt($("#milliseconds").html()) < 10) {
+                    $("#milliseconds").html('0' + $("#milliseconds").html());
+                }
+                if(parseInt($("#milliseconds").html()) > 99){
+                    $("#seconds").html(parseInt($("#seconds").html()) + 1);
+                    if (parseInt($("#seconds").html()) < 10) {
+                        $("#seconds").html('0' + $("#seconds").html());
+                    }
+                    if(parseInt($("#seconds").html()) > 59){
+                        $("#minutes").html(parseInt($("#minutes").html()) + 1);
+                        if (parseInt($("#minutes").html()) < 10) {
+                            $("#minutes").html('0' + $("#minutes").html());
+                        }
+                        if(parseInt($("#minutes").html()) > 59){
+                            $("#hours").html(parseInt($("#hours").html()) + 1);
+                            if (parseInt($("#hours").html()) < 10) {
+                                $("#hours").html('0' + $("#hours").html());
+                            }
+                            $("#minutes").html('0'+0);
+                        }
+                        $("#seconds").html('0'+0);
+                    }  
+                    $("#milliseconds").html('0'+0);
+                }
+            }, 10);
+        };
+
+        function stop(){
+            clearInterval(timer);
+            $(".btn-success").attr('disabled', false);
+            $(".btn-danger").attr('disabled', true);
+        };
+        
+        function reset() {
+			updateCounter();
+			clearInterval(timer);
+            $(".btn-success").attr('disabled', false);
+            $(".btn-danger").attr('disabled', true);
+            $(".btn-warning").attr('disabled', true);
+		};
+
+        function createRow(){
+            let row = '';
+		    for (var i = 0; i < lapArray.length; i++) {
+                row += `
+                    <tr>
+                        <th scope="row">${i+1}</th>
+                        <td>${lapArray[i]}</td>
+                        <td>
+                            <button class="btn btn-outline-danger" type='button' onclick='delLap(${i})'><i class="bi bi-file-minus"></i></button>
+                        </td>
+                    </tr>
+                `;
+		    }
+            $("tbody").html(row);
+        };
+
+        function lap(){
+			let lapTime = $("#hours").html() +'<sub>h</sub> ' + $("#minutes").html() +'<sub>m</sub> ' + $("#seconds").html() +'<sub>s</sub> ' + $("#milliseconds").html() +'<sub>ms</sub>';
+			lapArray.push(lapTime);
+            createRow();
+            updateTable();
+		};
+
+        function delLap(value){
+			lapArray.splice(value, 1);
+			createRow();
+            updateTable();
+		};
+
+        function updateCounter(){
+            $("#milliseconds").html('0'+0);
+            $("#seconds").html('0'+0);
+            $("#minutes").html('0'+0);
+            $("#hours").html('0'+0);
+        };
+
+        function updateTable(){
+            if(lapArray.length > 0){
+                $("#tableCard").show(500);
+            } else {
+                $("#tableCard").hide(500);
+            }
+        };
+        
+        $(".btn-danger").attr('disabled', true);
+        $(".btn-warning").attr('disabled', true);
+        updateCounter();
+        updateTable();
+    </script>
+</body>
+</html>

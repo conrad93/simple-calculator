@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changing Theme</title>
+    <style>
+        .dark-theme{
+            --primary: #222831;
+            --secondary: #393e46;
+            --light: #7bc74d;
+            --text: #eeeeee;
+        }
+        .light-theme{
+            --primary: #f7f6e7;
+            --secondary: #e7e6e1;
+            --light: #f2a154;
+            --text: #314e52;
+        }
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .main{
+            background-color: var(--secondary);
+            transition: all 1s;
+        }
+        nav{
+            background-color: var(--primary);
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            transition: all 1s;
+        }
+        .nav-items{
+            display: flex;
+            align-items: center;
+        }
+        section{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1{
+            color: var(--text);
+            font-size: 72px;
+            margin: 0;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            transition: all 1s;
+        }
+        .switch{
+            display: block;
+            width: 30px;
+            border-radius: 50px;
+            border: 1px solid var(--text);
+            padding: 0 5px;
+            box-sizing: border-box;
+            cursor: pointer;
+            background-color: var(--primary);
+            transition: all 1s;
+        }
+        .switch-input{
+            display: none;
+        }
+        .switch-slider{
+            background-color: var(--light);
+            border-radius: 34px;
+            height: 12px;
+            width: 12px;
+            display: inline-block;
+            transition: all 1s;
+        }
+        .switch-input:checked + .switch-slider{
+            transform: translateX(8px);
+        }
+    </style>
+</head>
+<body>
+    <div class="main light-theme">
+        <header>
+            <nav>
+                <div class="nav-items">
+                    <label class="switch">
+                        <input class="switch-input" type="checkbox"/>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </nav>
+        </header>
+        <section>
+            <h1>Change theme...</h1>
+        </section>
+    </div>
+    <script>
+        var switchInput = document.getElementsByClassName('switch-input');
+        var main = document.getElementsByClassName('main');
+        switchInput[0].addEventListener('change', () => {
+            main[0].classList.toggle('dark-theme');
+            main[0].classList.toggle('light-theme');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body{
+            background: #282828;
+            margin: 0;
+            font-size: 2rem;
+        }
+        .column{
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+            align-items: center;
+        }
+        .clock{
+            width: 30rem;
+            height: 30rem;
+            position: relative;
+            padding: 2rem;
+            border: 7px solid #282828;
+            box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
+                        inset 4px 4px 10px rgba(0,0,0,0.5),
+                        inset -4px -4px 10px rgba(67,67,67,0.5),
+                        4px 4px 10px rgba(0,0,0,0.3);
+            border-radius: 50%;
+            margin: 50px auto;
+        }
+        .outer-clock-face{
+            position: relative;
+            background: #282828;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+        }
+        .outer-clock-face::after{
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        .outer-clock-face::after,
+        .outer-clock-face::before,
+        .outer-clock-face .marking{
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            background: #CBC3E3;
+            z-index: 0;
+            left: 49%;
+        }
+        .outer-clock-face .marking{
+            background: #CBC3E3;
+            width: 3px;
+        }
+        .outer-clock-face .marking.marking-one{
+            -webkit-transform: rotate(30deg);
+            -moz-transform: rotate(30deg);
+            transform: rotate(30deg);
+        }
+        .outer-clock-face .marking.marking-two{
+            -webkit-transform: rotate(60deg);
+            -moz-transform: rotate(60deg);
+            transform: rotate(60deg);
+        }
+        .outer-clock-face .marking.marking-three{
+            -webkit-transform: rotate(120deg);
+            -moz-transform: rotate(120deg);
+            transform: rotate(120deg);
+        }
+        .outer-clock-face .marking.marking-four{
+            -webkit-transform: rotate(150deg);
+            -moz-transform: rotate(150deg);
+            transform: rotate(150deg);
+        }
+        .inner-clock-face{
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            background: #282828;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            z-index: 1;
+        }
+        .inner-clock-face::before{
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            border-radius: 18px;
+            margin-left: -9px;
+            margin-top: -6px;
+            background: #301934;
+            z-index: 11;
+        }
+        .hand{
+            width: 50%;
+            height: 6px;
+            background: #800080;
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            border-radius: 6px;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+        }
+        .hand.hour-hand{
+            width: 30%;
+            z-index: 3;
+        }
+        .hand.min-hand{
+            width: 40%;
+            height: 3px;
+            z-index: 10;
+        }
+        .hand.second-hand{
+            width: 45%;
+            height: 2px;
+            background: #BF40BF;
+        }
+        .digital-clock{
+            width: 20rem;
+            height: 10rem;
+            position: relative;
+            padding: 2rem;
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.3), -4px -4px 10px rgba(67,67,67,0.5);
+            border-radius: 5%;
+            margin: 50px auto;
+        }
+        .digital-clock div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .digital-clock h1{
+            color: #BF40BF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 column">
+                <div class="clock">
+                    <div class="outer-clock-face">
+                        <div class="marking marking-one"></div>
+                        <div class="marking marking-two"></div>
+                        <div class="marking marking-three"></div>
+                        <div class="marking marking-four"></div>
+                        <div class="inner-clock-face">
+                            <div class="hand hour-hand"></div>
+                            <div class="hand min-hand"></div>
+                            <div class="hand second-hand"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 column">
+                <div class="digital-clock">
+                    <div class="text-center">
+                        <h6 class="text-muted">Year, Month, Day</h6>
+                        <h1 class="display-1">00:00:00</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const secondHand = document.querySelector('.second-hand');
+        const minHand = document.querySelector('.min-hand');
+        const hourHand = document.querySelector('.hour-hand');
+        const digitalClock = document.querySelector('.digital-clock h1');
+        const digitalText = document.querySelector('.digital-clock h6');
+
+        function setTime(){
+            const now = new Date();
+
+            const seconds = now.getSeconds();
+            const secondsDegrees = ((seconds / 60) * 360) + 90;
+            secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+            
+            const mins = now.getMinutes();
+            const minsDegrees = ((mins / 60) * 360) + ((seconds / 60) * 6) + 90;
+            minHand.style.transform = `rotate(${minsDegrees}deg)`;
+            
+            const hours = now.getHours();
+            const hoursDegrees = ((hours / 12) * 360) + ((mins / 60) * 30) + 90;
+            hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+        }
+
+        function showTime(){
+            let now = new Date();
+            let ss = now.getSeconds();
+            let mm = now.getMinutes();
+            let hh = now.getHours();
+            let year = now.getFullYear();
+            let month = now.getMonth();
+            let date = now.getDate();
+            let day = now.getDay();
+
+            let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+            hh = (hh < 10) ? "0" + hh : hh;
+            mm = (mm < 10) ? "0" + mm : mm;
+            ss = (ss < 10) ? "0" + ss : ss;
+            
+            let time = hh + ":" + mm + ":" + ss;
+            digitalClock.innerHTML = time;
+            digitalText.innerHTML = days[day] + ", " + date + " " + months[month] + " " + year;
+
+            var t = setTimeout(function(){
+                showTime();
+            }, 1000);
+        }
+
+        setInterval(setTime, 1000);
+        setTime();
+        showTime();
+    </script>
+</body>
+</html>

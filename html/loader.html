@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinning Loader</title>
+    <style>
+        .loader{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .circle{
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 6px double;
+            border-color: rgb(255, 0, 0) rgb(255, 192, 192) rgb(255, 0, 0) rgb(255, 192, 192);
+            animation: spin 1.5s linear infinite;
+        }
+        .mid-circle{
+            margin: 2px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 6px double;
+            border-color: rgb(0, 255, 0) rgb(192, 255, 192) rgb(0, 255, 0) rgb(192, 255, 192);
+        }
+        .inner-circle{
+            margin: 2px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 6px double;
+            border-color: rgb(0, 0, 255) rgb(192, 192, 255) rgb(0, 0, 255) rgb(192, 192, 255);
+        }
+        @keyframes spin {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <h1>Loading...</h1>
+        <div class="circle">
+            <div class="mid-circle">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
