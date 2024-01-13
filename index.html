@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CALCULATOR</title>
+	<link rel="stylesheet" href="/css/styles/simple-calculator.css">
+</head>
+<body>
+	<div class="calculator">
+		<h1>CALCULATOR</h1>
+		<input id="display" placeholder="0" readonly>
+		<div>
+			<button type="button" class="btn btn-input">9</button>
+			<button type="button" class="btn btn-input">8</button>
+			<button type="button" class="btn btn-input">7</button>
+		</div>
+		<div>
+			<button type="button" class="btn btn-input">6</button>
+			<button type="button" class="btn btn-input">5</button>
+			<button type="button" class="btn btn-input">4</button>
+		</div>
+		<div>
+			<button type="button" class="btn btn-input">3</button>
+			<button type="button" class="btn btn-input">2</button>
+			<button type="button" class="btn btn-input">1</button>
+		</div>
+		<div>
+			<button type="button" class="btn btn-input">.</button>
+			<button type="button" class="btn btn-input">0</button>
+			<button type="button" class="btn" onclick="clearAll()">C</button>
+		</div>
+		<div>
+			<button type="button" class="btn btn-input">+</button>
+			<button type="button" class="btn btn-input">-</button>
+			<button type="button" class="btn" onclick="backspace()">&larr;</button>
+		</div>
+		<div>
+			<button type="button" class="btn btn-input">*</button>
+			<button type="button" class="btn btn-input">/</button>
+			<button type="button" class="btn" onclick="equals()">=</button>
+		</div>
+	</div>
+	<script src="/js/scripts/simple-calculator.js"></script>
+</body>
+</html>

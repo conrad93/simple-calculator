@@ -1,0 +1,45 @@
+.calculator{
+    box-shadow: 5px 10px 18px;
+    border-radius: 5px;
+    width: 300px;
+    margin-top:30px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    padding: 10px 10px 20px 10px;
+    background-color: #023020;
+}
+.calculator h1 {
+    color: #ffffff;
+}
+#display{
+    width: 90%;
+    height: 50px;
+    font-size: 40px;
+    background-color: black;
+    color: yellow;
+    border: 2px solid #353935;
+    border-radius: 10px;
+    outline: none;
+    text-align: right; 
+    padding: 5px;
+}
+.btn{
+    background-color: #FFD580;
+    color: #8B4000;
+    font-size: 20px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin: 5px;
+    width: 75px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border: none;
+}
+.btn:hover {
+    background-color: #FFAC1C;
+}
+.btn:active {
+    background-color: #FF7F50; /* Different color for active/click state */
+}
