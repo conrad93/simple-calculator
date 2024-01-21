@@ -1,0 +1,25 @@
+body{
+    background-color: #000000;
+    font-family: cursive;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+.glow{
+    color: #FF4500;
+    font-size: 80px;
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #FF4500, 0 0 20px #FF4500, 0 0 30px #800080, 0 0 40px #800080,
+        0 0 50px #800080;
+    }
+    to {
+        text-shadow: 0 0 20px #FF4500, 0 0 30px #FF4500, 0 0 40px #800080, 0 0 50px #800080,
+        0 0 60px #800080;
+    }
+}
