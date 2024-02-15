@@ -22,3 +22,17 @@
     1. O(1) - Constant Space: The algorithm uses a fixed amount of memory space regardless of the input size. For example, using a finite number of variables in a calculation.
     2. O(n) - Linear Space: The space required grows linearly with the size of the input. This is typical for algorithms that need to store data proportional to the input size, like creating a new array that is a copy of the input array.
     3. O(n²) - Quadratic Space: This occurs when the algorithm needs space that grows at the square of the input size, often seen in algorithms involving multidimensional arrays.
+
+### Problem Solving Patterns
+
+##### Frequency Counter Pattern
+*The frequency counter pattern is a common technique used in data structures and algorithms to efficiently track the frequencies of items in a collection (like characters in a string, or items in an array). This pattern often utilizes objects or hash tables to store the frequency of each element, allowing for efficient data access and manipulation.* ([Example](./anagram.js))
+
+##### Multiple Pointers Pattern
+*The Multiple Pointers pattern is a common approach in data structures and algorithms that involves creating pointers or values that correspond to an index or position and move towards the beginning, end, or middle based on a certain condition. This pattern is efficient for solving problems with minimal space complexity.* ([Example](./count-unique-values.js))
+
+##### Sliding Window Pattern
+*The Sliding Window pattern is a technique commonly used in data structures and algorithms to perform required operations on a subset of a data structure, typically an array or a string. This pattern is particularly useful for problems that involve contiguous sequences of elements, where these sequences are of fixed length (fixed-size window) or variable length (dynamic window).* ([Example](./max-subarray-sum.js))
+
+##### Divide And Conquer Pattern
+*The Divide and Conquer pattern is a fundamental algorithmic technique that involves breaking a problem into smaller sub-problems, solving each of these sub-problems independently, and then combining their solutions to solve the original problem. This pattern is recursive in nature and is widely used in a variety of complex computational tasks.*
