@@ -36,3 +36,8 @@
 
 ##### Divide And Conquer Pattern
 *The Divide and Conquer pattern is a fundamental algorithmic technique that involves breaking a problem into smaller sub-problems, solving each of these sub-problems independently, and then combining their solutions to solve the original problem. This pattern is recursive in nature and is widely used in a variety of complex computational tasks.*
+
+### Recursion
+
+##### Intro
+*A process or a function that calls itself.*
