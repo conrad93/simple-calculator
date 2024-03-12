@@ -41,3 +41,14 @@
 
 ##### Intro
 *A process or a function that calls itself.*
+
+### Searching Algorithms
+
+##### Linear Search
+*Linear search, also known as sequential search, is one of the simplest searching algorithms. It is used to find a particular element in a list. The algorithm sequentially checks each element of the list until a match is found or the whole list has been searched.* ([Example](./problems/linear-search.js))
+
+##### Binary Search
+*Binary search is an efficient algorithm for finding a target value within a sorted array. This search algorithm works on the principle of divide and conquer by repeatedly dividing in half the portion of the list that could contain the target value, thereby reducing the search area by half each time.* ([Example](./problems/binary-search.js))
+
+##### Naive String Search
+*The naive string search algorithm is a straightforward method for searching a substring within a main string. It checks for the presence of a substring by comparing each character of the main string (also known as the text) to the characters of the substring (also referred to as the pattern), one by one.* ([Example](./problems/naive-string-search.js))
