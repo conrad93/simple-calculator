@@ -52,3 +52,12 @@
 
 ##### Naive String Search
 *The naive string search algorithm is a straightforward method for searching a substring within a main string. It checks for the presence of a substring by comparing each character of the main string (also known as the text) to the characters of the substring (also referred to as the pattern), one by one.* ([Example](./problems/naive-string-search.js))
+
+### Bubble Sort
+*Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.* ([Example](./problems/bubble-sort.js))
+
+### Selection Sort
+*Selection sort is a simple comparison-based sorting algorithm.* ([Example](./problems/selection-sort.js))
+
+### Insertion Sort
+*Insertion Sort is a simple and intuitive sorting algorithm that builds the final sorted array (or list) one item at a time.* ([Example](./problems/insertion-sort.js))
