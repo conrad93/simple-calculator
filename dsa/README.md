@@ -61,3 +61,6 @@
 
 ### Insertion Sort
 *Insertion Sort is a simple and intuitive sorting algorithm that builds the final sorted array (or list) one item at a time.* ([Example](./problems/insertion-sort.js))
+
+### Merge Sort
+*Merge Sort is a divide-and-conquer algorithm that divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves.* ([Example](./problems/merge-sort.js))
