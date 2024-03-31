@@ -64,3 +64,6 @@
 
 ### Merge Sort
 *Merge Sort is a divide-and-conquer algorithm that divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves.* ([Example](./problems/merge-sort.js))
+
+### Quick Sort
+*Quick Sort is a highly efficient sorting algorithm and is based on the divide and conquer approach. It divides a large list into two smaller sub-lists: the low elements and the high elements. Quick Sort can then recursively sort the sub-lists.* ([Example](./problems/quick-sort.js))
