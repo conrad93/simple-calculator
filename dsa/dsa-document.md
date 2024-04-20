@@ -67,3 +67,6 @@
 
 ### Quick Sort
 *Quick Sort is a highly efficient sorting algorithm and is based on the divide and conquer approach. It divides a large list into two smaller sub-lists: the low elements and the high elements. Quick Sort can then recursively sort the sub-lists.* ([Example](./problems/quick-sort.js))
+
+### Radix Sort
+*Radix Sort is a non-comparative sorting algorithm that processes integer data by individual digit which are then sorted according to each digit's place value. It operates by organizing data from the least significant digit to the most significant digit or vice versa.* ([Example](./problems/radix-sort.js))

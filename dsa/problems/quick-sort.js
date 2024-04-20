@@ -10,7 +10,6 @@
 // }
 
 function quickSort(arr, left = 0, right = arr.length - 1){
-console.log(arr, left, right);
     const swap = (a, b) => {
         let temp = arr[a];
         arr[a] = arr[b];
