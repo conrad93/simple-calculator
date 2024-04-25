@@ -114,3 +114,77 @@
     5. Complete When Most Significant Digit is Processed:
         * Once the most significant digit has been sorted, the array is sorted.
 * ([Example](./algorithms/radix-sort.js))
+
+### Singly Linked List
+
+* A **Singly Linked List** is a basic data structure that consists of a sequence of elements called nodes, where each node holds two items: the data itself and a reference (or link) to the next node in the sequence. This structure allows for efficient insertion and deletion of elements as these operations do not require the elements to be contiguous in memory.
+
+* Key Features:
+    1. **Dynamic Size**: The size of a linked list can grow or shrink dynamically, so it's more flexible in using memory compared to arrays.
+    2. **Ease of Insertion/Deletion**: Inserting or deleting a node doesn't require shifting elements, as is necessary with arrays. This can lead to more efficient operations in scenarios where these operations are frequent.
+
+* Methods and Their Steps:
+
+    1. **Push (Insert at the end)**
+        - **Step 1**: Create a new node with the given value.
+        - **Step 2**: Check if the list is empty (i.e., the head is null). If it is, set the head and tail to the new node.
+        - **Step 3**: If the list is not empty, set the next pointer of the current tail to the new node.
+        - **Step 4**: Update the tail of the list to the new node.
+        - **Step 5**: Increment the length of the list.
+
+    2. **Pop (Remove from the end)**
+        - **Step 1**: Check if the list is empty. If it is, return undefined or appropriate error.
+        - **Step 2**: Traverse the list to find the second-last node.
+        - **Step 3**: Set the next pointer of the second-last node to null, making it the new tail.
+        - **Step 4**: Decrement the length of the list.
+        - **Step 5**: Return the value of the node removed.
+
+    3. **Shift (Remove from the beginning)**
+        - **Step 1**: Check if the list is empty. If it is, return undefined or appropriate error.
+        - **Step 2**: Store the current head node's value to return later.
+        - **Step 3**: Update the head to the next node in the list.
+        - **Step 4**: Decrement the list’s length.
+        - **Step 5**: If the list length is now zero, also set the tail to null.
+        - **Step 6**: Return the value of the original head node.
+
+    4. **Unshift (Insert at the beginning)**
+        - **Step 1**: Create a new node with the given value.
+        - **Step 2**: Set the new node’s next pointer to the current head.
+        - **Step 3**: Update the head to the new node.
+        - **Step 4**: Increment the list’s length.
+        - **Step 5**: If the list was empty (i.e., the tail was null), also set the tail to the new node.
+
+    5. **Get (Access an element by its index)**
+        - **Step 1**: Check if the index is out of bounds (negative or greater than or equal to the list's length). If so, return null or appropriate error.
+        - **Step 2**: Traverse the list to the specified index.
+        - **Step 3**: Return the node at that index.
+
+    6. **Set (Update the value at a specific index)**
+        - **Step 1**: Use the `Get` method to find the node at the specified index.
+        - **Step 2**: If the node exists, update its value and return true.
+        - **Step 3**: If the node does not exist, return false or appropriate error.
+
+    7. **Insert (Insert a node at a specific index)**
+        - **Step 1**: If the index is zero, use the `Unshift` method.
+        - **Step 2**: If the index is equal to the length of the list, use the `Push` method.
+        - **Step 3**: Otherwise, use the `Get` method to retrieve the node just before the desired index.
+        - **Step 4**: Create a new node with the given value.
+        - **Step 5**: Set the new node's next pointer to the next pointer of the previous node.
+        - **Step 6**: Set the next pointer of the previous node to the new node.
+        - **Step 7**: Increment the list's length.
+
+    8. **Remove (Remove a node at a specific index)**
+        - **Step 1**: If the index is zero, use the `Shift` method.
+        - **Step 2**: If the index is the length of the list minus one, use the `Pop` method.
+        - **Step 3**: Otherwise, use the `Get` method to retrieve the node just before the desired index.
+        - **Step 4**: Set the next pointer of the previous node to the next pointer of the node to be removed.
+        - **Step 5**: Decrement the list’s length.
+
+    9. **Reverse (Reverse the order of the list)**
+        - **Step 1**: Initialize three pointers, `previous` as `null`, `current` as the head of the list, and `next` as `null`. These pointers will help in reversing the link directions.
+        - **Step 2**: While `current` is not `null` (i.e., until the end of the list is reached):
+            - **Step 2.1**: Store the next node by setting `next` = `current.next` (This keeps the reference to the next node which will be lost during the reversal).
+            - **Step 2.2**: Reverse the current node's pointer by setting `current.next` = `previous`.
+            - **Step 2.3**: Move the `previous` and `current` pointers one step forward: set `previous` = `current` and `current` = `next`.
+        - **Step 3**: After the loop completes, set the list’s `head` to `previous` (as the `current` will now be `null` and `previous` will be at the last node which is the new head of the reversed list).
+        - **Step 4**: Ensure the `tail` is updated to what was the head of the list before reversing if maintaining a tail reference is necessary.
