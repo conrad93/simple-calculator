@@ -17,6 +17,35 @@
 # states_of_america.extend(["New Mexico", "New Hampshire"])
 
 import random
+
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+
+choices_art = [rock, paper, scissors]
 choices = ["Rock", "Paper", "Scissors"]
 winning_cases = {
     "Rock": "Scissors",
@@ -32,7 +61,9 @@ if user_choice_index >= 0 and user_choice_index <= 2:
     user_choice = choices[user_choice_index]
 
     print(f"You chose: {user_choice}")
+    print(choices_art[user_choice_index])
     print(f"Computer chose: {computer_choice}")
+    print(choices_art[random_choice])
 
     if user_choice == computer_choice:
         print("It's a draw")
