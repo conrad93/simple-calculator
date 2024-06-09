@@ -175,3 +175,75 @@ console.log(typeof null); // "object" - This is considered a bug in JavaScript
 console.log(typeof Symbol('symbol')); // "symbol"
 console.log("5" + 1); // "51" - Number 1 is converted to a string
 ```
+
+### Comparison Operators
+- Comparison operators are used to compare two values in JavaScript. They return a boolean value, either true or false, based on the comparison result. These operators are commonly used in conditional statements to determine the flow of the program based on different conditions.
+- Strict Equality (`===`); Compares both value and type.
+- Equality (`==`); Compares values after type coercion (converts the operands to the same type).
+- Less Than (`<`); Checks if the left operand is less than the right operand.
+- Greater Than (`>`); Checks if the left operand is greater than the right operand.
+- Strict Inequality (`!==`); Compares both value and type, returns true if they are not equal.
+- Inequality (`!=`); Compares values after type coercion, returns true if they are not equal.
+- Less Than or Equal To (`<=`); Checks if the left operand is less than or equal to the right operand.
+- Greater Than or Equal To (`>=`); Checks if the left operand is greater than or equal to the right operand.
+- Ternary Operator (`condition ? exprIfTrue : exprIfFalse`); A conditional operator that assigns a value to a variable based on a condition.
+- Use `===` and `!==`: It's generally recommended to use `===` and `!==` instead of `==` and `!=` to avoid unexpected results due to type coercion.
+- Type Coercion with `==` and `!=`: Using `==` and `!=` can lead to bugs because they perform type coercion, which can produce surprising results.
+
+### Boolean Operators
+- Boolean operators are used to perform logical operations.
+- AND (`&&`); Returns true if both operands are true.
+```
+let a = true && true;   // true
+let b = true && false;  // false
+let c = false && true;  // false
+let d = false && false; // false
+```
+- OR (`||`); Returns true if at least one of the operands is true.
+```
+let a = true || true;   // true
+let b = true || false;  // true
+let c = false || true;  // true
+let d = false || false; // false
+```
+- NOT (`!`); Returns the opposite boolean value of the operand.
+```
+let a = !true;  // false
+let b = !false; // true
+```
+- Truthy and Falsy Values; Values can be considered "truthy" or "falsy" in a boolean context. Here are some examples:
+    1. Falsy values: `false`, `0`, `""` (empty string), `null`, `undefined`, `NaN`
+    2. Truthy values: Everything else (including objects, non-zero numbers, non-empty strings, etc.)
+- Combining Operators; You can combine multiple boolean operators to form more complex expressions.
+```
+let a = (true && false) || (false && true); // false
+let b = !false && (true || false);          // true
+```
+
+### Conditional Statements
+- `if`, `else if`, and `else` statements are used to perform different actions based on different conditions.
+- `if` Statement; Executes a block of code if a specified condition is true.
+```
+if (condition) {
+    // block of code to be executed if the condition is true
+}
+```
+- `else` Statement; Executes a block of code if the same condition is false.
+```
+if (condition) {
+    // block of code to be executed if the condition is true
+} else {
+    // block of code to be executed if the condition is false
+}
+```
+- `else if` Statement; Specifies a new condition to test if the first condition is false.
+```
+if (condition1) {
+    // block of code to be executed if condition1 is true
+} else if (condition2) {
+    // block of code to be executed if condition1 is false and condition2 is true
+} else {
+    // block of code to be executed if both condition1 and condition2 are false
+}
+```
+
