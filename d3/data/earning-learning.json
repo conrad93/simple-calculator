@@ -220,5 +220,17 @@
         "year": 2023,
         "earning": 71047,
         "learning": 8
+    },
+    {
+        "month": "nov",
+        "year": 2023,
+        "earning": 65380,
+        "learning": 6
+    },
+    {
+        "month": "dec",
+        "year": 2023,
+        "earning": 0,
+        "learning": 8
     }
 ]
