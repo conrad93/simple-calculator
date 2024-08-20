@@ -61,7 +61,6 @@
 
         function drawLine(particle){
             let rgb = options.lineColor.match(/\d+/g);
-            console.log(rgb);
             for (let i = 0; i < particleArray.length; i++) {
                 let distance = Math.sqrt(Math.pow(particleArray[i].x - particle.x, 2) + Math.pow(particleArray[i].y - particle.y, 2));
                 let opacity = 1 - distance / options.distance;

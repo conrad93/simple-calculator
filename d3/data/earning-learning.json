@@ -230,7 +230,19 @@
     {
         "month": "dec",
         "year": 2023,
-        "earning": 0,
+        "earning": 65380,
         "learning": 8
+    },
+    {
+        "month": "jan",
+        "year": 2024,
+        "earning": 65368,
+        "learning": 7
+    },
+    {
+        "month": "feb",
+        "year": 2024,
+        "earning": 65380,
+        "learning": 6
     }
 ]
