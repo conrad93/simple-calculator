@@ -244,5 +244,23 @@
         "year": 2024,
         "earning": 65380,
         "learning": 6
+    },
+    {
+        "month": "mar",
+        "year": 2024,
+        "earning": 69792,
+        "learning": 6
+    },
+    {
+        "month": "apr",
+        "year": 2024,
+        "earning": 69690,
+        "learning": 6
+    },
+    {
+        "month": "may",
+        "year": 2024,
+        "earning": 31034,
+        "learning": 6
     }
 ]
