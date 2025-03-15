@@ -19,78 +19,162 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
         const MARGIN = {LEFT: 100, TOP: 10, RIGHT: 100, BOTTOM: 100};
-        const WIDTH = 800 - MARGIN.LEFT - MARGIN.RIGHT;
-        const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM;
+        const WIDTH = 1200 - MARGIN.LEFT - MARGIN.RIGHT;
+        const HEIGHT = 600 - MARGIN.TOP - MARGIN.BOTTOM;
 
         const svg = d3.select("#chart-container").append("svg")
-        .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
-        .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM);
+            .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
+            .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM);
+
         const g = svg.append("g")
-        .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
+            .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
         
+        const tooltip = d3.select("body").append("div")
+            .style("position", "absolute")
+            .style("padding", "6px 12px")
+            .style("background", "#fff")
+            .style("border", "1px solid #ccc")
+            .style("border-radius", "4px")
+            .style("pointer-events", "none")
+            .style("opacity", 0);
+
         d3.json("data/earning-learning.json").then(data => {
             const formattedData = data.map(el => {
                 el.month_year = el.month + "-" + el.year;
                 return el;
             });
-
             create(formattedData);
         }).catch(e => {
             console.error(e);
         });
 
         function create(data){
-            const x = d3.scaleBand().range([0, WIDTH])
-            .domain(data.map(d => d.month_year))
-            .paddingInner(0.3).paddingOuter(0.2);
-            const y = d3.scaleLinear().range([HEIGHT, 0])
-            .domain([0, d3.max(data, d => d.earning)]);
-            const z = d3.scaleLinear().range([HEIGHT, 0])
-            .domain([0, d3.max(data, d => d.learning)]);
+            const x = d3.scaleBand()
+                .range([0, WIDTH])
+                .domain(data.map(d => d.month_year))
+                .paddingInner(0.3)
+                .paddingOuter(0.2);
 
-            const xAxisCall = d3.axisBottom(x);
-            g.append("g").attr("class", "x axis")
-            .attr("transform", `translate(0, ${HEIGHT})`)
-            .call(xAxisCall);
+            const y = d3.scaleLinear()
+                .range([HEIGHT, 0])
+                .domain([0, d3.max(data, d => d.earning)]);
+
+            const z = d3.scaleLinear()
+                .range([HEIGHT, 0])
+                .domain([0, d3.max(data, d => d.learning)]);
+
+            const xAxisCall = d3.axisBottom(x)
+                .tickValues(x.domain().filter((d, i) => !(i % 3)));
+            g.append("g")
+                .attr("class", "x axis")
+                .attr("transform", `translate(0, ${HEIGHT})`)
+                .call(xAxisCall)
+                .append("text")
+                .attr("x", WIDTH / 2)
+                .attr("y", 50)
+                .attr("fill", "black")
+                .attr("text-anchor", "middle")
+                .text("Month-Year");
+
             const yAxisCall = d3.axisLeft(y);
-            g.append("g").attr("class", "y axis")
-            .call(yAxisCall);
+            g.append("g")
+                .attr("class", "y axis")
+                .call(yAxisCall)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -HEIGHT / 2)
+                .attr("y", -60)
+                .attr("fill", "black")
+                .attr("text-anchor", "middle")
+                .text("Earning");
+
             const zAxisCall = d3.axisRight(z);
-            g.append("g").attr("class", "z axis")
-            .attr("transform", `translate(${WIDTH}, 0)`)
-            .call(zAxisCall);
+            g.append("g")
+                .attr("class", "z axis")
+                .attr("transform", `translate(${WIDTH}, 0)`)
+                .call(zAxisCall)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -HEIGHT / 2)
+                .attr("y", 60)
+                .attr("fill", "black")
+                .attr("text-anchor", "middle")
+                .text("Learning");
 
             const yCircles = g.selectAll(".yCircle").data(data);
-            yCircles.enter().append("circle")
-            .attr("class", "yCircle")
-            .attr("cx", d => x(d.month_year) + (x.bandwidth() / 2))
-            .attr("cy", d => y(d.earning))
-            .attr("r", d => 2)
-            .attr("fill", "green");
+            yCircles.enter()
+                .append("circle")
+                .attr("class", "yCircle")
+                .attr("cx", d => x(d.month_year) + (x.bandwidth() / 2))
+                .attr("cy", d => y(d.earning))
+                .attr("r", d => 3)
+                .attr("fill", "green")
+                .on("mouseover", (event, d) => {
+                    tooltip.transition().duration(200).style("opacity", 1);
+                    tooltip.html(`Earning: ₹${d.earning.toLocaleString()}`)
+                        .style("left", `${event.pageX + 10}px`)
+                        .style("top", `${event.pageY - 20}px`);
+                })
+                .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+
             const yLine = g.append("path")
-            .datum(data)
-            .attr("fill", "none")
-            .attr("stroke", "green")
-            .attr("d", d3.line()
-                .x(d => x(d.month_year) + (x.bandwidth() / 2))
-                .y(d => y(d.earning))
-            );
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "green")
+                .attr("stroke-width", 2)
+                .attr("d", d3.line()
+                    .x(d => x(d.month_year) + (x.bandwidth() / 2))
+                    .y(d => y(d.earning))
+                );
             
             const zCircles = g.selectAll(".zCircle").data(data);
-            zCircles.enter().append("circle")
-            .attr("class", "zCircle")
-            .attr("cx", d => x(d.month_year) + (x.bandwidth() / 2))
-            .attr("cy", d => z(d.learning))
-            .attr("r", d => 2)
-            .attr("fill", "blue");
+            zCircles.enter()
+                .append("circle")
+                .attr("class", "zCircle")
+                .attr("cx", d => x(d.month_year) + (x.bandwidth() / 2))
+                .attr("cy", d => z(d.learning))
+                .attr("r", 3)
+                .attr("fill", "blue")
+                .on("mouseover", (event, d) => {
+                    tooltip.transition().duration(200).style("opacity", 1);
+                    tooltip.html(`Learning: ${d.learning}`)
+                        .style("left", `${event.pageX + 10}px`)
+                        .style("top", `${event.pageY - 20}px`);
+                })
+                .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+
             const zLine = g.append("path")
-            .datum(data)
-            .attr("fill", "none")
-            .attr("stroke", "blue")
-            .attr("d", d3.line()
-                .x(d => x(d.month_year) + (x.bandwidth() / 2))
-                .y(d => z(d.learning))
-            );
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "blue")
+                .attr("stroke-width", 2)
+                .attr("d", d3.line()
+                    .x(d => x(d.month_year) + (x.bandwidth() / 2))
+                    .y(d => z(d.learning))
+                );
+            
+            const legend = svg.append("g")
+                .attr("transform", `translate(${MARGIN.LEFT + 25}, ${MARGIN.TOP + 10})`);
+            
+            legend.append("circle")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", 6)
+                .attr("fill", "green");
+            legend.append("text")
+                .attr("x", 15)
+                .attr("y", 5)
+                .text("Earning");
+
+            legend.append("circle")
+                .attr("cx", 0)
+                .attr("cy", 25)
+                .attr("r", 6)
+                .attr("fill", "blue");
+            legend.append("text")
+                .attr("x", 15)
+                .attr("y", 30)
+                .text("Learning");
         }
     </script>
 </body>
