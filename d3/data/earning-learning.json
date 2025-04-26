@@ -308,7 +308,7 @@
     {
         "month": "jan",
         "year": 2025,
-        "earning": 0,
+        "earning": 104142,
         "learning": 6
     },
     {
@@ -321,6 +321,6 @@
         "month": "mar",
         "year": 2025,
         "earning": 0,
-        "learning": 0
+        "learning": 5
     }
 ]
