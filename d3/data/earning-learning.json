@@ -314,13 +314,85 @@
     {
         "month": "feb",
         "year": 2025,
-        "earning": 0,
+        "earning": 104042,
         "learning": 6
     },
     {
         "month": "mar",
         "year": 2025,
-        "earning": 0,
+        "earning": 104142,
         "learning": 5
+    },
+    {
+        "month": "apr",
+        "year": 2025,
+        "earning": 101650,
+        "learning": 4
+    },
+    {
+        "month": "may",
+        "year": 2025,
+        "earning": 101650,
+        "learning": 4
+    },
+    {
+        "month": "jun",
+        "year": 2025,
+        "earning": 101650,
+        "learning": 4
+    },
+    {
+        "month": "jul",
+        "year": 2025,
+        "earning": 101650,
+        "learning": 3
+    },
+    {
+        "month": "aug",
+        "year": 2025,
+        "earning": 101650,
+        "learning": 3
+    },
+    {
+        "month": "sep",
+        "year": 2025,
+        "earning": 101650,
+        "learning": 3
+    },
+    {
+        "month": "oct",
+        "year": 2025,
+        "earning": 111650,
+        "learning": 2
+    },
+    {
+        "month": "nov",
+        "year": 2025,
+        "earning": 111650,
+        "learning": 2
+    },
+    {
+        "month": "nov",
+        "year": 2025,
+        "earning": 111650,
+        "learning": 2
+    },
+    {
+        "month": "dec",
+        "year": 2025,
+        "earning": 111650,
+        "learning": 2
+    },
+    {
+        "month": "jan",
+        "year": 2026,
+        "earning": 111650,
+        "learning": 2
+    },
+    {
+        "month": "feb",
+        "year": 2026,
+        "earning": 111550,
+        "learning": 2
     }
 ]

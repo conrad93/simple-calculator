@@ -1,0 +1,10 @@
+- what is prompt engineering
+- five principles of prompting
+- giving direction
+- specify format
+- provide examples
+- evaluate quality
+- divide labor
+- what are tokens
+- what are hallucinations
+- chat models vs reasoning models

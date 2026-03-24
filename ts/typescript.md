@@ -1188,3 +1188,22 @@ Now, the global `Window` object has a custom method called `myCustomMethod`.
 3. **Creating Global Utility Functions**: If you want to define global utility functions that exist throughout your application without explicitly importing them everywhere, `declare` allows you to define them globally.
 
 4. **Third-Party Packages Without Type Definitions**: When using third-party packages that don’t have TypeScript support, you can manually declare modules or types using `declare`.
+
+### to add more about the following
+- Function return value types
+- 'void' type
+- 'never' type
+- functions as a type
+- null and undefined types
+- forced 'not null' and optinal chaining
+- type casting
+- 'unknown' type
+- optional values
+- nullish coalescing
+- typescript compiler and its configuration
+- classes in typescript
+- getters and setters in typescript
+- constant types with "as const"
+- record type
+- satisfies keyword
+- generics types
