@@ -372,12 +372,6 @@
         "learning": 2
     },
     {
-        "month": "nov",
-        "year": 2025,
-        "earning": 111650,
-        "learning": 2
-    },
-    {
         "month": "dec",
         "year": 2025,
         "earning": 111650,
@@ -394,5 +388,11 @@
         "year": 2026,
         "earning": 111550,
         "learning": 2
+    },
+    {
+        "month": "mar",
+        "year": 2026,
+        "earning": 102290,
+        "learning": 1
     }
 ]

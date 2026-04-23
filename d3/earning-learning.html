@@ -3,40 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earning-Learning</title>
+    <title>Earning vs Learning Progress</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container-fluid {
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #chart-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            margin: 1rem 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .chart-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .chart-title {
+                font-size: 1.5rem;
+            }
+            .container-fluid {
+                padding: 0.5rem;
+            }
+            #chart-container {
+                padding: 0.5rem;
+                margin: 0.5rem 0;
+            }
+        }
+        .axis text {
+            font-size: 12px;
+            fill: #34495e;
+        }
+        .axis line, .axis path {
+            stroke: #bdc3c7;
+            stroke-width: 1;
+        }
+        .grid line {
+            stroke: #ecf0f1;
+            stroke-width: 1;
+        }
+        .grid path {
+            stroke-width: 0;
+        }
+        .legend-text {
+            font-size: 14px;
+            font-weight: 600;
+            fill: #2c3e50;
+        }
+        .tooltip-custom {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 2px solid #3498db !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            font-weight: 600 !important;
+            color: #2c3e50 !important;
+        }
+        .tooltip-custom.earning {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(39, 174, 96, 0.05) 100%) !important;
+            border: 2px solid #27ae60 !important;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2) !important;
+        }
+        .tooltip-custom.learning {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(52, 152, 219, 0.05) 100%) !important;
+            border: 2px solid #3498db !important;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2) !important;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
-       <div class="row">
+        <div class="row">
             <div class="col-12">
+                <h1 class="chart-title">Earning vs Learning Progress</h1>
                 <div id="chart-container"></div>
             </div>
-       </div> 
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
-        const MARGIN = {LEFT: 100, TOP: 10, RIGHT: 100, BOTTOM: 100};
-        const WIDTH = 1200 - MARGIN.LEFT - MARGIN.RIGHT;
-        const HEIGHT = 600 - MARGIN.TOP - MARGIN.BOTTOM;
+        // Make chart responsive
+        function getResponsiveDimensions() {
+            const isMobile = window.innerWidth < 768;
+            const container = document.getElementById('chart-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Use available space minus padding
+            const availableWidth = containerRect.width - 40; // account for padding
+            const availableHeight = window.innerHeight - 200; // account for title and margins
+            
+            return {
+                width: Math.min(availableWidth, isMobile ? 600 : 1000),
+                height: Math.min(availableHeight, isMobile ? 400 : 500),
+                isMobile: isMobile
+            };
+        }
+
+        const dimensions = getResponsiveDimensions();
+        const MARGIN = dimensions.isMobile 
+            ? {LEFT: 60, TOP: 40, RIGHT: 60, BOTTOM: 60}
+            : {LEFT: 80, TOP: 60, RIGHT: 80, BOTTOM: 80};
+        const WIDTH = dimensions.width - MARGIN.LEFT - MARGIN.RIGHT;
+        const HEIGHT = dimensions.height - MARGIN.TOP - MARGIN.BOTTOM;
 
         const svg = d3.select("#chart-container").append("svg")
-            .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
-            .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM);
+            .attr("width", dimensions.width)
+            .attr("height", dimensions.height)
+            .attr("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`)
+            .attr("preserveAspectRatio", "xMidYMid meet");
 
         const g = svg.append("g")
             .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
-        
+
+        // Add resize listener
+        window.addEventListener('resize', function() {
+            // Could implement dynamic resize if needed
+        });
+
+        // Add gradient definitions
+        const defs = svg.append("defs");
+
+        const earningGradient = defs.append("linearGradient")
+            .attr("id", "earningGradient")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "0%")
+            .attr("y2", "100%");
+
+        earningGradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "#27ae60")
+            .attr("stop-opacity", 0.8);
+
+        earningGradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "#2ecc71")
+            .attr("stop-opacity", 0.2);
+
+        const learningGradient = defs.append("linearGradient")
+            .attr("id", "learningGradient")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "0%")
+            .attr("y2", "100%");
+
+        learningGradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "#3498db")
+            .attr("stop-opacity", 0.8);
+
+        learningGradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "#5dade2")
+            .attr("stop-opacity", 0.2);
+
         const tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip-custom")
             .style("position", "absolute")
-            .style("padding", "6px 12px")
-            .style("background", "#fff")
-            .style("border", "1px solid #ccc")
-            .style("border-radius", "4px")
+            .style("padding", "12px 16px")
             .style("pointer-events", "none")
-            .style("opacity", 0);
+            .style("opacity", 0)
+            .style("font-size", "14px");
 
         d3.json("data/earning-learning.json").then(data => {
             const formattedData = data.map(el => {
@@ -63,118 +213,256 @@
                 .range([HEIGHT, 0])
                 .domain([0, d3.max(data, d => d.learning)]);
 
-            const xAxisCall = d3.axisBottom(x)
-                .tickValues(x.domain().filter((d, i) => !(i % 3)));
+            // Add grid lines
+            const yGrid = d3.axisLeft(y)
+                .tickSize(-WIDTH)
+                .tickFormat("")
+                .ticks(10);
+
             g.append("g")
+                .attr("class", "grid")
+                .call(yGrid);
+
+            // X Axis - show fewer ticks to reduce clustering
+            const xAxisCall = d3.axisBottom(x)
+                .tickValues(x.domain().filter((d, i) => {
+                    // Show every 12th tick (roughly every year) or first/last
+                    return i === 0 || i === x.domain().length - 1 || !(i % 12);
+                }))
+                .tickFormat(d => {
+                    const [month, year] = d.split('-');
+                    return `${month.charAt(0).toUpperCase()}${month.slice(1)} ${year}`;
+                });
+            const xAxis = g.append("g")
                 .attr("class", "x axis")
                 .attr("transform", `translate(0, ${HEIGHT})`)
-                .call(xAxisCall)
-                .append("text")
-                .attr("x", WIDTH / 2)
-                .attr("y", 50)
-                .attr("fill", "black")
-                .attr("text-anchor", "middle")
-                .text("Month-Year");
+                .call(xAxisCall);
 
-            const yAxisCall = d3.axisLeft(y);
-            g.append("g")
+            xAxis.append("text")
+                .attr("x", WIDTH / 2)
+                .attr("y", dimensions.isMobile ? 50 : 60)
+                .attr("fill", "#2c3e50")
+                .attr("text-anchor", "middle")
+                .attr("font-size", dimensions.width < 600 ? "12px" : "14px")
+                .attr("font-weight", "600")
+                .text("Time Period");
+
+            // Y Axis (Earning)
+            const yAxisCall = d3.axisLeft(y)
+                .tickFormat(d => `₹${d3.format(",")(d)}`);
+            const yAxis = g.append("g")
                 .attr("class", "y axis")
-                .call(yAxisCall)
-                .append("text")
+                .call(yAxisCall);
+
+            yAxis.append("text")
                 .attr("transform", "rotate(-90)")
                 .attr("x", -HEIGHT / 2)
-                .attr("y", -60)
-                .attr("fill", "black")
+                .attr("y", dimensions.isMobile ? -50 : -60)
+                .attr("fill", "#27ae60")
                 .attr("text-anchor", "middle")
-                .text("Earning");
+                .attr("font-size", dimensions.width < 600 ? "12px" : "14px")
+                .attr("font-weight", "600")
+                .text("Earning (₹)");
 
+            // Z Axis (Learning)
             const zAxisCall = d3.axisRight(z);
-            g.append("g")
+            const zAxis = g.append("g")
                 .attr("class", "z axis")
                 .attr("transform", `translate(${WIDTH}, 0)`)
-                .call(zAxisCall)
-                .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("x", -HEIGHT / 2)
-                .attr("y", 60)
-                .attr("fill", "black")
-                .attr("text-anchor", "middle")
-                .text("Learning");
+                .call(zAxisCall);
 
-            const yCircles = g.selectAll(".yCircle").data(data);
-            yCircles.enter()
-                .append("circle")
-                .attr("class", "yCircle")
-                .attr("cx", d => x(d.month_year) + (x.bandwidth() / 2))
-                .attr("cy", d => y(d.earning))
-                .attr("r", d => 3)
-                .attr("fill", "green")
-                .on("mouseover", (event, d) => {
-                    tooltip.transition().duration(200).style("opacity", 1);
-                    tooltip.html(`Earning: ₹${d.earning.toLocaleString()}`)
-                        .style("left", `${event.pageX + 10}px`)
-                        .style("top", `${event.pageY - 20}px`);
-                })
-                .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+            zAxis.append("text")
+                .attr("transform", "rotate(90)")
+                .attr("x", HEIGHT / 2)
+                .attr("y", dimensions.isMobile ? -50 : -60)
+                .attr("fill", "#3498db")
+                .attr("text-anchor", "middle")
+                .attr("font-size", dimensions.width < 600 ? "12px" : "14px")
+                .attr("font-weight", "600")
+                .text("Learning Rating");
+
+            // Earning line with gradient
+            const earningArea = d3.area()
+                .x(d => x(d.month_year) + (x.bandwidth() / 2))
+                .y0(HEIGHT)
+                .y1(d => y(d.earning));
+
+            g.append("path")
+                .datum(data)
+                .attr("fill", "url(#earningGradient)")
+                .attr("d", earningArea)
+                .style("opacity", 0.3);
 
             const yLine = g.append("path")
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", "green")
-                .attr("stroke-width", 2)
+                .attr("stroke", "#27ae60")
+                .attr("stroke-width", 3)
                 .attr("d", d3.line()
+                    .curve(d3.curveMonotoneX)
                     .x(d => x(d.month_year) + (x.bandwidth() / 2))
                     .y(d => y(d.earning))
-                );
-            
+                )
+                .style("opacity", 0)
+                .transition()
+                .duration(1500)
+                .style("opacity", 1);
+
+            // Learning area
+            const learningArea = d3.area()
+                .x(d => x(d.month_year) + (x.bandwidth() / 2))
+                .y0(HEIGHT)
+                .y1(d => z(d.learning));
+
+            g.append("path")
+                .datum(data)
+                .attr("fill", "url(#learningGradient)")
+                .attr("d", learningArea)
+                .style("opacity", 0.3);
+
+            const zLine = g.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "#3498db")
+                .attr("stroke-width", 3)
+                .attr("d", d3.line()
+                    .curve(d3.curveMonotoneX)
+                    .x(d => x(d.month_year) + (x.bandwidth() / 2))
+                    .y(d => z(d.learning))
+                )
+                .style("opacity", 0)
+                .transition()
+                .duration(1500)
+                .style("opacity", 1);
+
+            // Learning circles (render before earning circles)
             const zCircles = g.selectAll(".zCircle").data(data);
             zCircles.enter()
                 .append("circle")
                 .attr("class", "zCircle")
                 .attr("cx", d => x(d.month_year) + (x.bandwidth() / 2))
                 .attr("cy", d => z(d.learning))
-                .attr("r", 3)
-                .attr("fill", "blue")
-                .on("mouseover", (event, d) => {
-                    tooltip.transition().duration(200).style("opacity", 1);
-                    tooltip.html(`Learning: ${d.learning}`)
-                        .style("left", `${event.pageX + 10}px`)
-                        .style("top", `${event.pageY - 20}px`);
-                })
-                .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
-
-            const zLine = g.append("path")
-                .datum(data)
-                .attr("fill", "none")
-                .attr("stroke", "blue")
+                .attr("r", 0)
+                .attr("fill", "#3498db")
+                .attr("stroke", "#fff")
                 .attr("stroke-width", 2)
-                .attr("d", d3.line()
-                    .x(d => x(d.month_year) + (x.bandwidth() / 2))
-                    .y(d => z(d.learning))
-                );
-            
+                .style("pointer-events", "auto")
+                .on("mouseover", function(event, d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr("r", 8);
+
+                    tooltip.transition().duration(200).style("opacity", 1);
+                    tooltip.attr("class", "tooltip-custom learning");
+                    tooltip.html(`<strong>Learning:</strong> ${d.learning} rating<br><strong>Month:</strong> ${d.month_year}`)
+                        .style("left", `${event.pageX + 15}px`)
+                        .style("top", `${event.pageY - 30}px`);
+                })
+                .on("mouseout", function() {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr("r", 3);
+
+                    tooltip.transition().duration(200).style("opacity", 0);
+                })
+                .transition()
+                .delay((d, i) => i * 100)
+                .duration(500)
+                .attr("r", 3);
+
+            // Earning circles (render LAST so they sit on top and are fully interactive)
+            const yCircles = g.selectAll(".yCircle").data(data);
+            yCircles.enter()
+                .append("circle")
+                .attr("class", "yCircle")
+                .attr("cx", d => x(d.month_year) + (x.bandwidth() / 2))
+                .attr("cy", d => y(d.earning))
+                .attr("r", 0)
+                .attr("fill", "#27ae60")
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2)
+                .style("pointer-events", "auto")
+                .on("mouseover", function(event, d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr("r", 8);
+
+                    tooltip.transition().duration(200).style("opacity", 1);
+                    tooltip.attr("class", "tooltip-custom earning");
+                    tooltip.html(`<strong>Earning:</strong> ₹${d.earning.toLocaleString()}<br><strong>Month:</strong> ${d.month_year}`)
+                        .style("left", `${event.pageX + 15}px`)
+                        .style("top", `${event.pageY - 30}px`);
+                })
+                .on("mouseout", function() {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr("r", 3);
+
+                    tooltip.transition().duration(200).style("opacity", 0);
+                })
+                .transition()
+                .delay((d, i) => i * 100)
+                .duration(500)
+                .attr("r", 3);
+
+            // Enhanced Legend
+            const legendX = dimensions.width < 600 ? MARGIN.LEFT + 20 : MARGIN.LEFT + 50;
+            const legendY = MARGIN.TOP + 10;
             const legend = svg.append("g")
-                .attr("transform", `translate(${MARGIN.LEFT + 25}, ${MARGIN.TOP + 10})`);
-            
-            legend.append("circle")
+                .attr("transform", `translate(${legendX}, ${legendY})`);
+
+            // Earning legend
+            const earningLegend = legend.append("g");
+
+            earningLegend.append("rect")
+                .attr("x", -10)
+                .attr("y", -10)
+                .attr("width", dimensions.width < 600 ? 120 : 140)
+                .attr("height", 30)
+                .attr("fill", "rgba(39, 174, 96, 0.1)")
+                .attr("rx", 5);
+
+            earningLegend.append("circle")
                 .attr("cx", 0)
                 .attr("cy", 0)
                 .attr("r", 6)
-                .attr("fill", "green");
-            legend.append("text")
+                .attr("fill", "#27ae60");
+
+            earningLegend.append("text")
                 .attr("x", 15)
                 .attr("y", 5)
-                .text("Earning");
+                .attr("class", "legend-text")
+                .attr("font-size", dimensions.width < 600 ? "12px" : "14px")
+                .text("Earning (₹)");
 
-            legend.append("circle")
+            // Learning legend
+            const learningLegend = legend.append("g")
+                .attr("transform", "translate(0, 35)");
+
+            learningLegend.append("rect")
+                .attr("x", -10)
+                .attr("y", -10)
+                .attr("width", dimensions.width < 600 ? 120 : 140)
+                .attr("height", 30)
+                .attr("fill", "rgba(52, 152, 219, 0.1)")
+                .attr("rx", 5);
+
+            learningLegend.append("circle")
                 .attr("cx", 0)
-                .attr("cy", 25)
+                .attr("cy", 0)
                 .attr("r", 6)
-                .attr("fill", "blue");
-            legend.append("text")
+                .attr("fill", "#3498db");
+
+            learningLegend.append("text")
                 .attr("x", 15)
-                .attr("y", 30)
-                .text("Learning");
+                .attr("y", 5)
+                .attr("class", "legend-text")
+                .attr("font-size", dimensions.width < 600 ? "12px" : "14px")
+                .text("Learning Rating");
         }
     </script>
 </body>
